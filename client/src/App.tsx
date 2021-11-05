@@ -1,11 +1,11 @@
 import React from "react";
 import "./css/main.css";
+import { Layout } from "./components/Layout/Layout";
 
 export const App: React.FC = () => {
     return (
-        <div>
-            <p>This is the app</p>
-            <p>Another paragraph</p>
-        </div>
+        <Layout>
+            <p>This is part of the app</p>
+        </Layout>
     );
 };
