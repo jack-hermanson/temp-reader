@@ -6,6 +6,8 @@ import { config } from "dotenv";
 import { ConnectionOptions, createConnection } from "typeorm";
 import sslRedirect from "heroku-ssl-redirect";
 import { DbDialect } from "jack-hermanson-ts-utils";
+import { migrations } from "./migrations/_migrations";
+import { models } from "./models/_models";
 
 // env
 const envPath = path.join(__dirname, "..", ".env");
@@ -42,7 +44,7 @@ export const dbOptions: ConnectionOptions = {
     database: databaseDialect === "sqlite" ? "site.db" : "",
     type: databaseDialect,
     url: process.env.DATABASE_URL,
-    entities: [], // todo
+    entities: models,
     synchronize: false,
     extra: {
         ssl: {
@@ -51,7 +53,7 @@ export const dbOptions: ConnectionOptions = {
     },
     migrationsRun: true,
     migrationsTableName: "migrations",
-    migrations: [], // todo
+    migrations: migrations,
 };
 createConnection(dbOptions)
     .then(connection => {

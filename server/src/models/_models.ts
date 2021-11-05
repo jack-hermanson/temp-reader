@@ -1,1 +1,3 @@
-export const models = [];
+import { Measurement } from "./Measurement";
+
+export const models = [Measurement];
