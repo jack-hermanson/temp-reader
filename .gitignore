@@ -78,3 +78,5 @@ typings/
 # Other
 .idea
 **/site.db
+shared/lib/
+**/build/

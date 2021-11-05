@@ -1,0 +1,11 @@
+@import "bootswatch_variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "bootswatch";
+
+body {
+  background-color: #2b3e50;
+}
+
+.form-control, .form-control:focus, .form-select, .form-select:focus {
+  background-color: white;
+}

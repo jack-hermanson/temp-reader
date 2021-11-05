@@ -1,0 +1,18 @@
+
+.body-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.main-container {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.footer-container {
+  margin-top: auto;
+}
+
+img.logo {
+  height: 24px;
+}
