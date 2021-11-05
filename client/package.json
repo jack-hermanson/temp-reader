@@ -1,0 +1,54 @@
+{
+    "name": "client",
+    "private": false,
+    "license": "MIT",
+    "proxy": "http://localhost:5000",
+    "dependencies": {
+        "@popperjs/core": "^2.10.2",
+        "@types/node": "^12.0.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@types/react-router-dom": "^5.3.2",
+        "axios": "^0.24.0",
+        "bootstrap": "^5.1.3",
+        "customize-cra": "^1.0.0",
+        "easy-peasy": "^5.0.4",
+        "jack-hermanson-component-lib": "^1.5.2",
+        "jack-hermanson-css-lib": "^1.3.0",
+        "jack-hermanson-ts-utils": "^1.15.2",
+        "moment": "^2.29.1",
+        "react": "^17.0.2",
+        "react-app-rewired": "^2.1.8",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^6.0.0",
+        "react-scripts": "^4.0.3",
+        "reactstrap": "^9.0.0",
+        "socket.io-client": "^4.3.2",
+        "typescript": "^4.1.2"
+    },
+    "scripts": {
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "sass": "^1.43.4"
+    }
+}
