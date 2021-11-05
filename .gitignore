@@ -77,4 +77,4 @@ typings/
 
 # Other
 .idea
-server/site.db
+**/site.db
