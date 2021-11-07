@@ -8,6 +8,7 @@ import sslRedirect from "heroku-ssl-redirect";
 import { DbDialect } from "jack-hermanson-ts-utils";
 import { migrations } from "./migrations/_migrations";
 import { models } from "./models/_models";
+import { routes } from "./routes/_routes";
 
 // env
 const envPath = path.join(__dirname, "..", ".env");
@@ -27,7 +28,7 @@ const staticFiles = express.static(path.join(__dirname, "../../client/build"));
 app.use(staticFiles);
 
 // routes
-// todo
+app.use("/api/measurements", routes.measurements);
 
 // production redirects
 if (process.env.NODE_ENV === "production") {
