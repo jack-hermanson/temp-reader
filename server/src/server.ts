@@ -9,6 +9,7 @@ import { DbDialect } from "jack-hermanson-ts-utils";
 import { migrations } from "./migrations/_migrations";
 import { models } from "./models/_models";
 import { routes } from "./routes/_routes";
+import { auth } from "./middleware/auth";
 
 // env
 const envPath = path.join(__dirname, "..", ".env");
@@ -26,6 +27,9 @@ app.use(sslRedirect(["production"]));
 // static
 const staticFiles = express.static(path.join(__dirname, "../../client/build"));
 app.use(staticFiles);
+
+// middleware
+app.use(auth);
 
 // routes
 app.use("/api/measurements", routes.measurements);
