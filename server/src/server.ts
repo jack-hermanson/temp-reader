@@ -9,7 +9,6 @@ import { DbDialect } from "jack-hermanson-ts-utils";
 import { migrations } from "./migrations/_migrations";
 import { models } from "./models/_models";
 import { routes } from "./routes/_routes";
-import { auth } from "./middleware/auth";
 
 // env
 const envPath = path.join(__dirname, "..", ".env");
@@ -42,6 +41,7 @@ if (process.env.NODE_ENV === "production") {
 
 // database
 const databaseDialect = process.env.DATABASE_DIALECT as DbDialect;
+console.log(`Database dialect: ${databaseDialect}`);
 export const dbOptions: ConnectionOptions = {
     database: databaseDialect === "sqlite" ? "site.db" : "",
     type: databaseDialect,
