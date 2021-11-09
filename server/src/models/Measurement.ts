@@ -17,7 +17,7 @@ export class Measurement {
     @Column({ nullable: false, type: "float" })
     humidity!: number;
 
-    @Column({ nullable: false, type: "timestamp" })
+    @Column({ nullable: false })
     generated!: Date; // when raspberry pi generated request
 
     @CreateDateColumn()
