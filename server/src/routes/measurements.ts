@@ -5,11 +5,13 @@ import { measurementSchema } from "../models/Measurement";
 import { MeasurementService } from "../services/MeasurementService";
 import { Socket } from "socket.io";
 import { SocketEvent } from "../../../shared";
+import { auth } from "../middleware/auth";
 
 export const router = Router();
 
 router.post(
     "/",
+    auth,
     async (
         req: Request<MeasurementRequest>,
         res: Response<MeasurementRecord>

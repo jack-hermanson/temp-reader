@@ -1,5 +1,6 @@
 import { Fragment, useEffect, FunctionComponent } from "react";
 import { io, Socket } from "socket.io-client";
+import { SocketEvent } from "../../../../shared";
 
 export const SocketConnection: FunctionComponent = () => {
     useEffect(() => {
@@ -11,6 +12,10 @@ export const SocketConnection: FunctionComponent = () => {
 
         socket.on("disconnect", () => {
             console.log("Socket disconnected on front end.");
+        });
+
+        socket.on(SocketEvent.NEW_MEASUREMENT, () => {
+            console.log("New measurement");
         });
     });
 
