@@ -26,7 +26,7 @@ export abstract class MeasurementService {
 
         const measurements = await measurementRepo.find();
         measurements.sort((a, b) => {
-            if (a.created < b.created) {
+            if (a.created > b.created) {
                 return -1;
             }
             return 1;
