@@ -22,6 +22,7 @@ export const SocketConnection: FunctionComponent = () => {
 
         socket.on(SocketEvent.NEW_MEASUREMENT, () => {
             console.log("New measurement");
+            loadMeasurements();
         });
     });
 
