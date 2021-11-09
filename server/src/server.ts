@@ -28,9 +28,6 @@ app.use(sslRedirect(["production"]));
 const staticFiles = express.static(path.join(__dirname, "../../client/build"));
 app.use(staticFiles);
 
-// middleware
-app.use(auth);
-
 // routes
 app.use("/api/measurements", routes.measurements);
 
