@@ -24,14 +24,11 @@ export abstract class MeasurementService {
     static async getAll(): Promise<Measurement[]> {
         const { measurementRepo } = this.getRepos();
 
-        const measurements = await measurementRepo.find();
-        measurements.sort((a, b) => {
-            if (a.created > b.created) {
-                return -1;
-            }
-            return 1;
-        });
+        const query = measurementRepo
+            .createQueryBuilder()
+            .orderBy("generated", "DESC")
+            .take(15);
 
-        return measurements;
+        return await query.getMany();
     }
 }
