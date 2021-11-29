@@ -2,3 +2,5 @@
 * text=auto
 *.css linguist-vendored
 *.js linguist-vendored
+client/src/css/_bootswatch.scss linguist-vendored
+client/src/css/_bootswatch-variables.scss -linguist-vendored
