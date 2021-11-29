@@ -41,9 +41,9 @@ In order to prevent bots or people with bad intentions from flooding our server 
 
 ```json
 {
-	"temperature": 78.5,
-	"humidity": 0.12,
-	"generated": "2021-11-12T18:44:58.273Z"
+  "temperature": 78.5,
+  "humidity": 0.12,
+  "generated": "2021-11-12T18:44:58.273Z"
 }
 ```
 
