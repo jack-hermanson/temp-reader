@@ -20,7 +20,7 @@ export const Measurement: FunctionComponent<Props> = ({
                 {millisecondToSecond(
                     Moment(measurement.created).toDate().getTime() -
                         Moment(measurement.generated).toDate().getTime()
-                )}{" "}
+                ).toFixed(1)}{" "}
                 seconds
             </td>
         </tr>

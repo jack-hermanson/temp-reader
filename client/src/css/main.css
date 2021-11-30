@@ -11344,4 +11344,15 @@ dl {
   margin-bottom: 0;
 }
 
+@media (max-width: 991.98px) {
+  .border-right-bottom {
+    border-bottom: 1px solid white;
+  }
+}
+@media (min-width: 992px) {
+  .border-right-bottom {
+    border-right: 1px solid white;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
