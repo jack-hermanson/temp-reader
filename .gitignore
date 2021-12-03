@@ -80,3 +80,4 @@ typings/
 **/site.db
 shared/lib/
 **/build/
+.DS_Store

@@ -39,7 +39,7 @@ export const Measurements: FunctionComponent = () => {
                 </thead>
                 {measurements ? (
                     <tbody>
-                        {measurements.slice(1).map(measurement => (
+                        {measurements.map(measurement => (
                             <Measurement
                                 measurement={measurement}
                                 key={measurement.id}
