@@ -15,7 +15,11 @@ export const Measurement: FunctionComponent<Props> = ({
         <tr>
             <td>{measurement.temperature.toFixed(1)} &#8457;</td>
             <td>{(measurement.humidity * 100).toFixed(1)} %</td>
-            <td>{Moment(measurement.generated).local().format("h:mm:ss a")}</td>
+            <td>
+                {Moment(measurement.generated)
+                    .local()
+                    .format("ddd MM/DD/YYYY hh:mma")}
+            </td>
             <td>
                 {millisecondToSecond(
                     Moment(measurement.created).toDate().getTime() -
