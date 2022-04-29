@@ -40,6 +40,6 @@ export abstract class MeasurementService {
             .select('AVG("measurement"."temperature")', "average")
             .getRawOne()) as { average: number };
 
-        return average.round(3);
+        return average.round(1);
     }
 }

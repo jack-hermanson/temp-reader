@@ -32,7 +32,7 @@ export const Measurements: FunctionComponent = () => {
                 <thead>
                     <tr>
                         <th>Temp</th>
-                        <th>Humidity</th>
+                        {/*<th>Humidity</th>*/}
                         <th>Generated</th>
                         <th>Delay</th>
                     </tr>
@@ -47,7 +47,13 @@ export const Measurements: FunctionComponent = () => {
                         ))}
                     </tbody>
                 ) : (
-                    <LoadingSpinner />
+                    <tbody>
+                        <tr>
+                            <td colSpan={3}>
+                                <LoadingSpinner />
+                            </td>
+                        </tr>
+                    </tbody>
                 )}
             </Table>
         );

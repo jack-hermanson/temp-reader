@@ -13,6 +13,9 @@ export interface StoreModel {
     measurements: MeasurementRecord[] | undefined;
     setMeasurements: Action<StoreModel, MeasurementRecord[]>;
     loadMeasurements: Thunk<StoreModel>;
+    averageTemp: number | undefined;
+    setAverageTemp: Action<StoreModel, number>;
+    loadAverageTemp: Thunk<StoreModel>;
 }
 
 export const store = createStore<StoreModel>({
@@ -27,6 +30,21 @@ export const store = createStore<StoreModel>({
             );
             const measurements = response.data;
             actions.setMeasurements(measurements);
+        } catch (error) {
+            console.error(error);
+        }
+    }),
+    averageTemp: undefined,
+    setAverageTemp: action((state, payload) => {
+        state.averageTemp = payload;
+    }),
+    loadAverageTemp: thunk(async actions => {
+        try {
+            const response = await axios.get<number>(
+                "/api/measurements/average-temp"
+            );
+            const averageTemp = response.data;
+            actions.setAverageTemp(averageTemp);
         } catch (error) {
             console.error(error);
         }
