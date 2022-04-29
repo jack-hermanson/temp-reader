@@ -1,6 +1,5 @@
 import { MeasurementRecord } from "../../../../shared";
-import { Fragment, FunctionComponent } from "react";
-import { KeyValTable } from "jack-hermanson-component-lib";
+import { FunctionComponent } from "react";
 import Moment from "moment";
 import { millisecondToSecond } from "../../functions";
 
