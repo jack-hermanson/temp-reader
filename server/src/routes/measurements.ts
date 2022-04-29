@@ -33,3 +33,8 @@ router.get("/", async (req: Request, res: Response<MeasurementRecord[]>) => {
     const measurements = await MeasurementService.getAll();
     res.json(measurements);
 });
+
+router.get("/average-temp", async (req: Request, res: Response<number>) => {
+    const average = await MeasurementService.getAverageTemp();
+    res.json(average);
+});

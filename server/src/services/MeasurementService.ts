@@ -31,4 +31,15 @@ export abstract class MeasurementService {
 
         return await query.getMany();
     }
+
+    static async getAverageTemp(): Promise<number> {
+        const { measurementRepo } = this.getRepos();
+
+        const { average } = (await measurementRepo
+            .createQueryBuilder("measurement")
+            .select('AVG("measurement"."temperature")', "average")
+            .getRawOne()) as { average: number };
+
+        return average.round(3);
+    }
 }
