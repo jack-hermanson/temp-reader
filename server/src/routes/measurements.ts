@@ -29,12 +29,35 @@ router.post(
     }
 );
 
-router.get("/", async (req: Request, res: Response<MeasurementRecord[]>) => {
-    const measurements = await MeasurementService.getAll();
-    res.json(measurements);
-});
+router.get(
+    "/",
+    async (
+        req: Request<any, any, any, { skip: string; take: string }>,
+        res: Response<MeasurementRecord[]>
+    ) => {
+        let skip: number | undefined;
+        let take: number | undefined;
+
+        if (req.query.skip) {
+            skip = parseInt(req.query.skip);
+        }
+        if (req.query.take) {
+            take = parseInt(req.query.take);
+        }
+
+        const measurements = await MeasurementService.getAll(skip, take);
+
+        res.json(measurements);
+    }
+);
 
 router.get("/average-temp", async (req: Request, res: Response<number>) => {
     const average = await MeasurementService.getAverageTemp();
     res.json(average);
+});
+
+router.get("/count", async (req: Request, res: Response<number>) => {
+    const count = await MeasurementService.getCount();
+
+    res.json(count);
 });

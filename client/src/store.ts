@@ -16,6 +16,11 @@ export interface StoreModel {
     averageTemp: number | undefined;
     setAverageTemp: Action<StoreModel, number>;
     loadAverageTemp: Thunk<StoreModel>;
+    skip: number;
+    setSkip: Action<StoreModel, number>;
+    totalCount: number;
+    setTotalCount: Action<StoreModel, number>;
+    loadTotalCount: Thunk<StoreModel>;
 }
 
 export const store = createStore<StoreModel>({
@@ -30,6 +35,7 @@ export const store = createStore<StoreModel>({
             );
             const measurements = response.data;
             actions.setMeasurements(measurements);
+            actions.setSkip(measurements.length);
         } catch (error) {
             console.error(error);
         }
@@ -45,6 +51,23 @@ export const store = createStore<StoreModel>({
             );
             const averageTemp = response.data;
             actions.setAverageTemp(averageTemp);
+        } catch (error) {
+            console.error(error);
+        }
+    }),
+    skip: 0,
+    setSkip: action((state, payload) => {
+        state.skip = payload;
+    }),
+    totalCount: 0,
+    setTotalCount: action((state, payload) => {
+        state.totalCount = payload;
+    }),
+    loadTotalCount: thunk(async actions => {
+        try {
+            const response = await axios.get<number>("/api/measurements/count");
+            const totalCount = response.data;
+            actions.setTotalCount(totalCount);
         } catch (error) {
             console.error(error);
         }

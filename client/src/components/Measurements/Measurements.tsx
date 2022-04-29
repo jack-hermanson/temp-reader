@@ -2,12 +2,14 @@ import { Fragment, FunctionComponent } from "react";
 import { useStoreState } from "../../store";
 import { LoadingSpinner } from "jack-hermanson-component-lib";
 import { Measurement } from "./Measurement";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import { FirstMeasurement } from "./FirstMeasurement";
 import { Row, Col } from "reactstrap";
 
 export const Measurements: FunctionComponent = () => {
     const measurements = useStoreState(state => state.measurements);
+    const count = useStoreState(state => state.totalCount);
+    const skip = useStoreState(state => state.skip);
 
     return (
         <Fragment>
@@ -16,6 +18,16 @@ export const Measurements: FunctionComponent = () => {
             </Row>
             <Row>
                 <Col>{renderTable()}</Col>
+            </Row>
+            <Row>
+                <Col>
+                    Loaded {skip} of {count}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button color="secondary">Load More</Button>
+                </Col>
             </Row>
         </Fragment>
     );

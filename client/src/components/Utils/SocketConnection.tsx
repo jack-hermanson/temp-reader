@@ -8,6 +8,7 @@ export const SocketConnection: FunctionComponent = () => {
         actions => actions.loadMeasurements
     );
     const loadAverageTemp = useStoreActions(actions => actions.loadAverageTemp);
+    const loadTotalCount = useStoreActions(actions => actions.loadTotalCount);
 
     useEffect(() => {
         const socket: Socket = io("/");
@@ -16,6 +17,7 @@ export const SocketConnection: FunctionComponent = () => {
             console.log("Socket connected on front end.");
             loadMeasurements();
             loadAverageTemp();
+            loadTotalCount();
         });
 
         socket.on("disconnect", () => {
@@ -26,6 +28,7 @@ export const SocketConnection: FunctionComponent = () => {
             console.log("New measurement");
             loadMeasurements();
             loadAverageTemp();
+            loadTotalCount();
         });
     });
 

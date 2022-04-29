@@ -21,13 +21,14 @@ export abstract class MeasurementService {
         return await measurementRepo.save(measurementRequest);
     }
 
-    static async getAll(): Promise<Measurement[]> {
+    static async getAll(skip = 0, take = 10): Promise<Measurement[]> {
         const { measurementRepo } = this.getRepos();
 
         const query = measurementRepo
             .createQueryBuilder()
             .orderBy("generated", "DESC")
-            .take(15);
+            .skip(skip)
+            .take(take);
 
         return await query.getMany();
     }
@@ -41,5 +42,11 @@ export abstract class MeasurementService {
             .getRawOne()) as { average: number };
 
         return average.round(1);
+    }
+
+    static async getCount(): Promise<number> {
+        const { measurementRepo } = this.getRepos();
+
+        return await measurementRepo.count();
     }
 }
