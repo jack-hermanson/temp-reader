@@ -1,13 +1,20 @@
 import { Fragment, FunctionComponent } from "react";
-import { useStoreState } from "../../store";
+import { useStoreActions, useStoreState } from "../../store";
 import { LoadingSpinner } from "jack-hermanson-component-lib";
 import { Measurement } from "./Measurement";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import { FirstMeasurement } from "./FirstMeasurement";
 import { Row, Col } from "reactstrap";
 
 export const Measurements: FunctionComponent = () => {
     const measurements = useStoreState(state => state.measurements);
+    const count = useStoreState(state => state.totalCount);
+    const skip = useStoreState(state => state.skip);
+
+    const setSkip = useStoreActions(actions => actions.setSkip);
+    const loadMoreMeasurements = useStoreActions(
+        actions => actions.loadMoreMeasurements
+    );
 
     return (
         <Fragment>
@@ -17,6 +24,7 @@ export const Measurements: FunctionComponent = () => {
             <Row>
                 <Col>{renderTable()}</Col>
             </Row>
+            {renderSkipTake()}
         </Fragment>
     );
 
@@ -32,7 +40,7 @@ export const Measurements: FunctionComponent = () => {
                 <thead>
                     <tr>
                         <th>Temp</th>
-                        <th>Humidity</th>
+                        {/*<th>Humidity</th>*/}
                         <th>Generated</th>
                         <th>Delay</th>
                     </tr>
@@ -47,9 +55,41 @@ export const Measurements: FunctionComponent = () => {
                         ))}
                     </tbody>
                 ) : (
-                    <LoadingSpinner />
+                    <tbody>
+                        <tr>
+                            <td colSpan={3}>
+                                <LoadingSpinner />
+                            </td>
+                        </tr>
+                    </tbody>
                 )}
             </Table>
         );
+    }
+
+    function renderSkipTake() {
+        return (
+            <Fragment>
+                <Row>
+                    <Col>
+                        Loaded {skip < count ? skip : count} of {count}
+                    </Col>
+                </Row>
+                {skip < count && (
+                    <Row>
+                        <Col>
+                            <Button color="secondary" onClick={loadMore}>
+                                Load More
+                            </Button>
+                        </Col>
+                    </Row>
+                )}
+            </Fragment>
+        );
+    }
+
+    async function loadMore() {
+        await loadMoreMeasurements(skip);
+        setSkip(skip + 10);
     }
 };
