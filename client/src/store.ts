@@ -13,6 +13,8 @@ export interface StoreModel {
     measurements: MeasurementRecord[] | undefined;
     setMeasurements: Action<StoreModel, MeasurementRecord[]>;
     loadMeasurements: Thunk<StoreModel>;
+    appendToMeasurements: Action<StoreModel, MeasurementRecord[]>;
+    loadMoreMeasurements: Thunk<StoreModel, number>;
     averageTemp: number | undefined;
     setAverageTemp: Action<StoreModel, number>;
     loadAverageTemp: Thunk<StoreModel>;
@@ -36,6 +38,27 @@ export const store = createStore<StoreModel>({
             const measurements = response.data;
             actions.setMeasurements(measurements);
             actions.setSkip(measurements.length);
+        } catch (error) {
+            console.error(error);
+        }
+    }),
+    appendToMeasurements: action((state, payload) => {
+        if (state.measurements) {
+            state.measurements = [...state.measurements, ...payload];
+        }
+    }),
+    loadMoreMeasurements: thunk(async (actions, skip) => {
+        try {
+            const response = await axios.get<MeasurementRecord[]>(
+                "/api/measurements",
+                {
+                    params: {
+                        skip,
+                    },
+                }
+            );
+            const newMeasurements = response.data;
+            actions.appendToMeasurements(newMeasurements);
         } catch (error) {
             console.error(error);
         }

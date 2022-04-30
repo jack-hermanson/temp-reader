@@ -12,7 +12,9 @@ export const Measurement: FunctionComponent<Props> = ({
 }: Props) => {
     return (
         <tr>
-            <td>{measurement.temperature.toFixed(1)} &#8457;</td>
+            <td>
+                ({measurement.id}) {measurement.temperature.toFixed(1)} &#8457;
+            </td>
             {/*<td>{(measurement.humidity * 100).toFixed(1)} %</td>*/}
             <td>
                 {Moment(measurement.generated)

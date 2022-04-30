@@ -1,5 +1,5 @@
 import { Fragment, FunctionComponent } from "react";
-import { useStoreState } from "../../store";
+import { useStoreActions, useStoreState } from "../../store";
 import { LoadingSpinner } from "jack-hermanson-component-lib";
 import { Measurement } from "./Measurement";
 import { Button, Table } from "reactstrap";
@@ -11,6 +11,11 @@ export const Measurements: FunctionComponent = () => {
     const count = useStoreState(state => state.totalCount);
     const skip = useStoreState(state => state.skip);
 
+    const setSkip = useStoreActions(actions => actions.setSkip);
+    const loadMoreMeasurements = useStoreActions(
+        actions => actions.loadMoreMeasurements
+    );
+
     return (
         <Fragment>
             <Row>
@@ -19,16 +24,7 @@ export const Measurements: FunctionComponent = () => {
             <Row>
                 <Col>{renderTable()}</Col>
             </Row>
-            <Row>
-                <Col>
-                    Loaded {skip} of {count}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Button color="secondary">Load More</Button>
-                </Col>
-            </Row>
+            {renderSkipTake()}
         </Fragment>
     );
 
@@ -69,5 +65,31 @@ export const Measurements: FunctionComponent = () => {
                 )}
             </Table>
         );
+    }
+
+    function renderSkipTake() {
+        return (
+            <Fragment>
+                <Row>
+                    <Col>
+                        Loaded {skip < count ? skip : count} of {count}
+                    </Col>
+                </Row>
+                {skip < count && (
+                    <Row>
+                        <Col>
+                            <Button color="secondary" onClick={loadMore}>
+                                Load More
+                            </Button>
+                        </Col>
+                    </Row>
+                )}
+            </Fragment>
+        );
+    }
+
+    async function loadMore() {
+        await loadMoreMeasurements(skip);
+        setSkip(skip + 10);
     }
 };
